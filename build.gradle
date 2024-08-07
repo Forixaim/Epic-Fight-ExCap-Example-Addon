@@ -1,12 +1,10 @@
 buildscript {
     repositories {
        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = "https://repo.spongepowered.org/maven" }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
@@ -14,12 +12,10 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+' apply false
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
 
 
 
@@ -104,7 +100,6 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            args '-mixin.config=mixins.epic_fight_battle_styles.json'
         }
 
         server {
@@ -112,7 +107,6 @@ minecraft {
             args '--nogui'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            args '-mixin.config=mixins.epic_fight_battle_styles.json'
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -189,6 +183,7 @@ dependencies {
     implementation fg.deobf("libs:WeaponsOfMiracles:20.1.8.5")
     implementation fg.deobf("libs:EpicFightCE:20.8.1")
     implementation fg.deobf("libs:EpicFightExCap:20.8.1")
+    implementation fg.deobf("libs:EpicFightBA:20.8.5.8")
 
     //
     implementation fg.deobf("curse.maven:explosive-enhancement-reforged-1036246:5423875")
@@ -209,11 +204,6 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-}
-
-mixin {
-    add sourceSets.main, "mixins.epic_fight_battle_styles.refmap.json"
-    config "mixins.epic_fight_battle_styles.json"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

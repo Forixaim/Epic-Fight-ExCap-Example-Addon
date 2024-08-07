@@ -15,4 +15,4 @@ plugins {
 
 }
 
-rootProject.name = 'Epic Fight - Battle Arts'
+rootProject.name = 'Epic Fight Ex Cap Example Addon'
